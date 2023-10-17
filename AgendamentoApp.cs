@@ -23,12 +23,15 @@ namespace Gerenciador_de_Tarefas
         private Label label3;
         private Label label2;
         private Label label1;
+        private Button btnSalvar;
+        private Button btnDeletar;
+        private Button btnEditar;
         private AgendamentoRepository repository;
 
         public AgendamentoApp()
         {
             InitializeComponent();
-            string connectionString = "SuaStringDeConexãoSQL";
+            string connectionString = "string do banco de dados";
             repository = new AgendamentoRepository(connectionString);
         }
 
@@ -129,155 +132,191 @@ namespace Gerenciador_de_Tarefas
 
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridViewAtividades = new System.Windows.Forms.DataGridView();
-            this.checkBoxExecucao = new System.Windows.Forms.CheckBox();
-            this.checkBoxConcluida = new System.Windows.Forms.CheckBox();
-            this.monthCalendarData = new System.Windows.Forms.MonthCalendar();
-            this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAtividades)).BeginInit();
-            this.SuspendLayout();
+            panel1 = new Panel();
+            btnDeletar = new Button();
+            btnEditar = new Button();
+            btnSalvar = new Button();
+            dataGridViewAtividades = new DataGridView();
+            checkBoxExecucao = new CheckBox();
+            checkBoxConcluida = new CheckBox();
+            monthCalendarData = new MonthCalendar();
+            txtDescricao = new TextBox();
+            txtNome = new TextBox();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).BeginInit();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.dataGridViewAtividades);
-            this.panel1.Controls.Add(this.checkBoxExecucao);
-            this.panel1.Controls.Add(this.checkBoxConcluida);
-            this.panel1.Controls.Add(this.monthCalendarData);
-            this.panel1.Controls.Add(this.txtDescricao);
-            this.panel1.Controls.Add(this.txtNome);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1075, 493);
-            this.panel1.TabIndex = 2;
+            panel1.BackColor = SystemColors.Control;
+            panel1.Controls.Add(btnDeletar);
+            panel1.Controls.Add(btnEditar);
+            panel1.Controls.Add(btnSalvar);
+            panel1.Controls.Add(dataGridViewAtividades);
+            panel1.Controls.Add(checkBoxExecucao);
+            panel1.Controls.Add(checkBoxConcluida);
+            panel1.Controls.Add(monthCalendarData);
+            panel1.Controls.Add(txtDescricao);
+            panel1.Controls.Add(txtNome);
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1075, 493);
+            panel1.TabIndex = 2;
+            // 
+            // btnDeletar
+            // 
+            btnDeletar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeletar.Location = new Point(965, 425);
+            btnDeletar.Name = "btnDeletar";
+            btnDeletar.Size = new Size(98, 44);
+            btnDeletar.TabIndex = 14;
+            btnDeletar.Text = "Deletar";
+            btnDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEditar.Location = new Point(861, 425);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(98, 44);
+            btnEditar.TabIndex = 13;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            // 
+            // btnSalvar
+            // 
+            btnSalvar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnSalvar.Location = new Point(357, 362);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(98, 44);
+            btnSalvar.TabIndex = 12;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // dataGridViewAtividades
             // 
-            this.dataGridViewAtividades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAtividades.Location = new System.Drawing.Point(517, 63);
-            this.dataGridViewAtividades.Name = "dataGridViewAtividades";
-            this.dataGridViewAtividades.RowHeadersWidth = 51;
-            this.dataGridViewAtividades.RowTemplate.Height = 24;
-            this.dataGridViewAtividades.Size = new System.Drawing.Size(548, 353);
-            this.dataGridViewAtividades.TabIndex = 11;
+            dataGridViewAtividades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAtividades.Location = new Point(517, 63);
+            dataGridViewAtividades.Name = "dataGridViewAtividades";
+            dataGridViewAtividades.RowHeadersWidth = 51;
+            dataGridViewAtividades.RowTemplate.Height = 24;
+            dataGridViewAtividades.Size = new Size(548, 353);
+            dataGridViewAtividades.TabIndex = 11;
             // 
             // checkBoxExecucao
             // 
-            this.checkBoxExecucao.AutoSize = true;
-            this.checkBoxExecucao.Location = new System.Drawing.Point(342, 262);
-            this.checkBoxExecucao.Name = "checkBoxExecucao";
-            this.checkBoxExecucao.Size = new System.Drawing.Size(125, 20);
-            this.checkBoxExecucao.TabIndex = 10;
-            this.checkBoxExecucao.Tag = "2";
-            this.checkBoxExecucao.Text = "EM EXECUÇÃO";
-            this.checkBoxExecucao.UseVisualStyleBackColor = true;
+            checkBoxExecucao.AutoSize = true;
+            checkBoxExecucao.Location = new Point(342, 262);
+            checkBoxExecucao.Name = "checkBoxExecucao";
+            checkBoxExecucao.Size = new Size(130, 24);
+            checkBoxExecucao.TabIndex = 10;
+            checkBoxExecucao.Tag = "2";
+            checkBoxExecucao.Text = "EM EXECUÇÃO";
+            checkBoxExecucao.UseVisualStyleBackColor = true;
             // 
             // checkBoxConcluida
             // 
-            this.checkBoxConcluida.AutoSize = true;
-            this.checkBoxConcluida.Location = new System.Drawing.Point(342, 288);
-            this.checkBoxConcluida.Name = "checkBoxConcluida";
-            this.checkBoxConcluida.Size = new System.Drawing.Size(106, 20);
-            this.checkBoxConcluida.TabIndex = 9;
-            this.checkBoxConcluida.Tag = "1";
-            this.checkBoxConcluida.Text = "CONCLUIDA";
-            this.checkBoxConcluida.UseVisualStyleBackColor = true;
+            checkBoxConcluida.AutoSize = true;
+            checkBoxConcluida.Location = new Point(342, 288);
+            checkBoxConcluida.Name = "checkBoxConcluida";
+            checkBoxConcluida.Size = new Size(113, 24);
+            checkBoxConcluida.TabIndex = 9;
+            checkBoxConcluida.Tag = "1";
+            checkBoxConcluida.Text = "CONCLUIDA";
+            checkBoxConcluida.UseVisualStyleBackColor = true;
             // 
             // monthCalendarData
             // 
-            this.monthCalendarData.Location = new System.Drawing.Point(17, 262);
-            this.monthCalendarData.Name = "monthCalendarData";
-            this.monthCalendarData.TabIndex = 8;
+            monthCalendarData.Location = new Point(17, 262);
+            monthCalendarData.Name = "monthCalendarData";
+            monthCalendarData.TabIndex = 8;
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Location = new System.Drawing.Point(17, 153);
-            this.txtDescricao.Multiline = true;
-            this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(462, 62);
-            this.txtDescricao.TabIndex = 6;
+            txtDescricao.Location = new Point(17, 153);
+            txtDescricao.Multiline = true;
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.Size = new Size(462, 62);
+            txtDescricao.TabIndex = 6;
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(17, 92);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(462, 22);
-            this.txtNome.TabIndex = 5;
+            txtNome.Location = new Point(17, 92);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(462, 27);
+            txtNome.TabIndex = 5;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(342, 227);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 26);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "SITUAÇÃO:";
+            label5.AutoSize = true;
+            label5.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(342, 227);
+            label5.Name = "label5";
+            label5.Size = new Size(133, 26);
+            label5.TabIndex = 4;
+            label5.Text = "SITUAÇÃO:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 227);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 26);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "PRAZO:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(17, 227);
+            label4.Name = "label4";
+            label4.Size = new Size(92, 26);
+            label4.TabIndex = 3;
+            label4.Text = "PRAZO:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(17, 124);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 26);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "DESCRIÇÃO:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(17, 124);
+            label3.Name = "label3";
+            label3.Size = new Size(147, 26);
+            label3.TabIndex = 2;
+            label3.Text = "DESCRIÇÃO:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 26);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "NOME:";
+            label2.AutoSize = true;
+            label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(17, 63);
+            label2.Name = "label2";
+            label2.Size = new Size(83, 26);
+            label2.TabIndex = 1;
+            label2.Text = "NOME:";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(243, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(579, 49);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "AGENDADOR DE TAREFAS";
+            label1.AutoSize = true;
+            label1.Font = new Font("Times New Roman", 25.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(243, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(579, 49);
+            label1.TabIndex = 0;
+            label1.Text = "AGENDADOR DE TAREFAS";
             // 
             // AgendamentoApp
             // 
-            this.ClientSize = new System.Drawing.Size(1075, 493);
-            this.Controls.Add(this.panel1);
-            this.Name = "AgendamentoApp";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAtividades)).EndInit();
-            this.ResumeLayout(false);
-
+            ClientSize = new Size(1075, 493);
+            Controls.Add(panel1);
+            Name = "AgendamentoApp";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).EndInit();
+            ResumeLayout(false);
         }
     }
 }
