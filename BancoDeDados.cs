@@ -55,13 +55,13 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "INSERT INTO Atividades (Nome, Descricao, Data, Concluida) VALUES (@Nome, @Descricao, @Data, @Concluida)";
+                string query = "INSERT INTO Atividades (Nome, Descricao, Data, situacao) VALUES (@Nome, @Descricao, @Data, @situacao)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nome", atividade.nome);
                     command.Parameters.AddWithValue("@Descricao", atividade.descricao);
                     command.Parameters.AddWithValue("@Data", atividade.prazo);
-                    command.Parameters.AddWithValue("@Concluida", atividade.situacao);
+                    command.Parameters.AddWithValue("@situacao", atividade.situacao);
                     command.ExecuteNonQuery();
                 }
             }
