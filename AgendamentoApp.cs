@@ -55,17 +55,23 @@ namespace Gerenciador_de_Tarefas
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            Atividade atividade = new Atividade
+            try
             {
-                nome = txtNome.Text,
-                descricao = txtDescricao.Text,
-                prazo = monthCalendarData.SelectionStart,
-                situacao = pegarCheckBoxValor()
-            };
+                Atividade atividade = new Atividade
+                {
+                    nome = txtNome.Text,
+                    descricao = txtDescricao.Text,
+                    prazo = monthCalendarData.SelectionStart,
+                    situacao = pegarCheckBoxValor()
+                };
 
                 repository.AdicionarAtividade(atividade);
                 RefreshDataGrid();
                 ClearForm();
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Erro ao salvar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private int pegarCheckBoxValor()
@@ -84,31 +90,44 @@ namespace Gerenciador_de_Tarefas
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dataGridViewAtividades.SelectedRows.Count > 0)
-            {
-                Atividade atividade = new Atividade
+            try { 
+                if (dataGridViewAtividades.SelectedRows.Count > 0)
                 {
-                    id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value,
-                    nome = txtNome.Text,
-                    descricao = txtDescricao.Text,
-                    prazo = monthCalendarData.SelectionStart,
-                    situacao = pegarCheckBoxValor()
-                };
+                    Atividade atividade = new Atividade
+                    {
+                        id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value,
+                        nome = txtNome.Text,
+                        descricao = txtDescricao.Text,
+                        prazo = monthCalendarData.SelectionStart,
+                        situacao = pegarCheckBoxValor()
+                    };
 
-                repository.EditarAtividade(atividade);
-                RefreshDataGrid();
-                ClearForm();
+                    repository.EditarAtividade(atividade);
+                    RefreshDataGrid();
+                    ClearForm();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Erro ao editar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dataGridViewAtividades.SelectedRows.Count > 0)
+            try
             {
-                int id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value;
-                repository.ExcluirAtividade(id);
-                RefreshDataGrid();
-                ClearForm();
+                if (dataGridViewAtividades.SelectedRows.Count > 0)
+                {
+                    int id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value;
+                    repository.ExcluirAtividade(id);
+                    RefreshDataGrid();
+                    ClearForm();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao deletar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
