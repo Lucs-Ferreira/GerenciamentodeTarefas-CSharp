@@ -33,15 +33,8 @@ namespace Gerenciador_de_Tarefas
         {
             InitializeComponent();
             string connectionString = "string do banco de dados";
-            try
-            {
-                repository = new AgendamentoRepository(connectionString);
-            } catch(Exception ex)
-            {
-                Message.box.show("Erro ao conectar no banco de dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            repository = new AgendamentoRepository(connectionString);
         }
-            
 
         private void AgendamentoApp_Load(object sender, EventArgs e)
         {
