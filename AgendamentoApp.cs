@@ -33,8 +33,15 @@ namespace Gerenciador_de_Tarefas
         {
             InitializeComponent();
             string connectionString = "string do banco de dados";
-            repository = new AgendamentoRepository(connectionString);
+            try
+            {
+                repository = new AgendamentoRepository(connectionString);
+            } catch(Exception ex)
+            {
+                Message.box.show("Erro ao conectar no banco de dados: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+            
 
         private void AgendamentoApp_Load(object sender, EventArgs e)
         {
@@ -57,9 +64,9 @@ namespace Gerenciador_de_Tarefas
                 situacao = pegarCheckBoxValor()
             };
 
-            repository.AdicionarAtividade(atividade);
-            RefreshDataGrid();
-            ClearForm();
+                repository.AdicionarAtividade(atividade);
+                RefreshDataGrid();
+                ClearForm();
         }
 
         private int pegarCheckBoxValor()
