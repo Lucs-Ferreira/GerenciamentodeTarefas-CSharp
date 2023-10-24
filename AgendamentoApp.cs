@@ -205,7 +205,7 @@ namespace Gerenciador_de_Tarefas
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSalvar.Location = new Point(357, 362);
+            btnSalvar.Location = new Point(357, 366);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(98, 44);
             btnSalvar.TabIndex = 12;
