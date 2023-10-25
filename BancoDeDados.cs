@@ -83,7 +83,7 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "UPDATE dbo.tarefas SET Nome = @Nome, Descricao = @Descricao, Data = @Data, Concluida = @Concluida WHERE ID = @ID";
+                string query = "UPDATE atividades SET Nome = @Nome, Descricao = @Descricao, Data = @Data, Concluida = @Concluida WHERE ID = @ID";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", atividade.id);
@@ -102,7 +102,7 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "DELETE FROM dbo.tarefas WHERE ID = @ID";
+                string query = "DELETE FROM atividades WHERE ID = @ID";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", id);

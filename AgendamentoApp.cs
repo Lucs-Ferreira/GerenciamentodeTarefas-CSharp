@@ -26,7 +26,6 @@ namespace Gerenciador_de_Tarefas
         private Button btnSalvar;
         private Button btnDeletar;
         private Button btnEditar;
-        private Button button1;
         private BindingSource atividadeBindingSource;
         private System.ComponentModel.IContainer components;
         private AgendamentoRepository repository;
@@ -177,7 +176,6 @@ namespace Gerenciador_de_Tarefas
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
-            button1 = new Button();
             btnDeletar = new Button();
             btnEditar = new Button();
             btnSalvar = new Button();
@@ -201,7 +199,6 @@ namespace Gerenciador_de_Tarefas
             // panel1
             // 
             panel1.BackColor = SystemColors.Control;
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(btnDeletar);
             panel1.Controls.Add(btnEditar);
             panel1.Controls.Add(btnSalvar);
@@ -221,13 +218,6 @@ namespace Gerenciador_de_Tarefas
             panel1.Name = "panel1";
             panel1.Size = new Size(1075, 493);
             panel1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(0, 0);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
             // 
             // btnDeletar
             // 
@@ -275,7 +265,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxExecucao.AutoSize = true;
             checkBoxExecucao.Location = new Point(342, 262);
             checkBoxExecucao.Name = "checkBoxExecucao";
-            checkBoxExecucao.Size = new Size(106, 19);
+            checkBoxExecucao.Size = new Size(130, 24);
             checkBoxExecucao.TabIndex = 10;
             checkBoxExecucao.Tag = "2";
             checkBoxExecucao.Text = "EM EXECUÇÃO";
@@ -286,7 +276,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxConcluida.AutoSize = true;
             checkBoxConcluida.Location = new Point(342, 288);
             checkBoxConcluida.Name = "checkBoxConcluida";
-            checkBoxConcluida.Size = new Size(93, 19);
+            checkBoxConcluida.Size = new Size(113, 24);
             checkBoxConcluida.TabIndex = 9;
             checkBoxConcluida.Tag = "1";
             checkBoxConcluida.Text = "CONCLUIDA";
@@ -310,7 +300,7 @@ namespace Gerenciador_de_Tarefas
             // 
             txtNome.Location = new Point(17, 92);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(462, 23);
+            txtNome.Size = new Size(462, 27);
             txtNome.TabIndex = 5;
             // 
             // label5
@@ -319,7 +309,7 @@ namespace Gerenciador_de_Tarefas
             label5.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(342, 227);
             label5.Name = "label5";
-            label5.Size = new Size(109, 21);
+            label5.Size = new Size(133, 26);
             label5.TabIndex = 4;
             label5.Text = "SITUAÇÃO:";
             // 
@@ -329,7 +319,7 @@ namespace Gerenciador_de_Tarefas
             label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(17, 227);
             label4.Name = "label4";
-            label4.Size = new Size(76, 21);
+            label4.Size = new Size(92, 26);
             label4.TabIndex = 3;
             label4.Text = "PRAZO:";
             // 
@@ -339,7 +329,7 @@ namespace Gerenciador_de_Tarefas
             label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(17, 124);
             label3.Name = "label3";
-            label3.Size = new Size(121, 21);
+            label3.Size = new Size(147, 26);
             label3.TabIndex = 2;
             label3.Text = "DESCRIÇÃO:";
             // 
@@ -349,7 +339,7 @@ namespace Gerenciador_de_Tarefas
             label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(17, 63);
             label2.Name = "label2";
-            label2.Size = new Size(68, 21);
+            label2.Size = new Size(83, 26);
             label2.TabIndex = 1;
             label2.Text = "NOME:";
             // 
@@ -359,7 +349,7 @@ namespace Gerenciador_de_Tarefas
             label1.Font = new Font("Times New Roman", 25.8F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(243, 9);
             label1.Name = "label1";
-            label1.Size = new Size(465, 40);
+            label1.Size = new Size(579, 49);
             label1.TabIndex = 0;
             label1.Text = "AGENDADOR DE TAREFAS";
             // 
