@@ -24,7 +24,7 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "SELECT * FROM Atividades";
+                string query = "SELECT * FROM atividades";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -36,9 +36,19 @@ namespace Gerenciador_de_Tarefas
                                 id = Convert.ToInt32(reader["ID"]),
                                 nome = reader["Nome"].ToString(),
                                 descricao = reader["Descricao"].ToString(),
-                                prazo = Convert.ToDateTime(reader["Data"]),
-                                situacao = Convert.ToInt32(reader["Concluida"])
+                                prazo = Convert.ToDateTime(reader["Data"])
                             };
+
+                            if (int.TryParse(reader["Concluida"].ToString(), out int situacao))
+                            {
+                                atividade.situacao = situacao;
+                            }
+                            else
+                            {
+                                // Trate o caso em que o valor não pôde ser convertido para int.
+                                // Por exemplo, defina um valor padrão, como 0.
+                                atividade.situacao = 0;
+                            }
 
                             atividades.Add(atividade);
                         }
@@ -55,7 +65,7 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "INSERT INTO Atividades (Nome, Descricao, Data, situacao) VALUES (@Nome, @Descricao, @Data, @situacao)";
+                string query = "INSERT INTO atividades (Nome, Descricao, Data, situacao) VALUES (@Nome, @Descricao, @Data, @situacao)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nome", atividade.nome);
@@ -73,7 +83,7 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "UPDATE Atividades SET Nome = @Nome, Descricao = @Descricao, Data = @Data, Concluida = @Concluida WHERE ID = @ID";
+                string query = "UPDATE dbo.tarefas SET Nome = @Nome, Descricao = @Descricao, Data = @Data, Concluida = @Concluida WHERE ID = @ID";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", atividade.id);
@@ -92,7 +102,7 @@ namespace Gerenciador_de_Tarefas
             {
                 connection.Open();
 
-                string query = "DELETE FROM Atividades WHERE ID = @ID";
+                string query = "DELETE FROM dbo.tarefas WHERE ID = @ID";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", id);

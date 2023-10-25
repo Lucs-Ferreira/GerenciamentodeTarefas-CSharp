@@ -88,11 +88,17 @@ namespace Gerenciador_de_Tarefas
         {
             if (checkBoxConcluida.Checked)
             {
-                return (int)checkBoxConcluida.Tag;
+                if (int.TryParse(checkBoxConcluida.Tag.ToString(), out int result))
+                {
+                    return result;
+                }
             }
             else if (checkBoxExecucao.Checked)
             {
-                return (int)checkBoxExecucao.Tag;
+                if (int.TryParse(checkBoxExecucao.Tag.ToString(), out int result))
+                {
+                    return result;
+                }
             }
 
             return 0;
