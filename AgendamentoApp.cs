@@ -26,17 +26,25 @@ namespace Gerenciador_de_Tarefas
         private Button btnSalvar;
         private Button btnDeletar;
         private Button btnEditar;
-        private Button button1;
+        private BindingSource atividadeBindingSource;
+        private System.ComponentModel.IContainer components;
         private AgendamentoRepository repository;
 
+        public static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new AgendamentoApp());
+        }
         public AgendamentoApp()
         {
             InitializeComponent();
-            string connectionString = "string do banco de dados";
+            string connectionString = "Data Source=LUCAS\\SQLSERVER2022;Initial Catalog=master;Integrated Security=True";
             try
             {
                 repository = new AgendamentoRepository(connectionString);
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -68,7 +76,8 @@ namespace Gerenciador_de_Tarefas
                 repository.AdicionarAtividade(atividade);
                 RefreshDataGrid();
                 ClearForm();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao salvar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -78,11 +87,17 @@ namespace Gerenciador_de_Tarefas
         {
             if (checkBoxConcluida.Checked)
             {
-                return (int)checkBoxConcluida.Tag;
+                if (int.TryParse(checkBoxConcluida.Tag.ToString(), out int result))
+                {
+                    return result;
+                }
             }
             else if (checkBoxExecucao.Checked)
             {
-                return (int)checkBoxExecucao.Tag;
+                if (int.TryParse(checkBoxExecucao.Tag.ToString(), out int result))
+                {
+                    return result;
+                }
             }
 
             return 0;
@@ -90,7 +105,8 @@ namespace Gerenciador_de_Tarefas
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            try { 
+            try
+            {
                 if (dataGridViewAtividades.SelectedRows.Count > 0)
                 {
                     Atividade atividade = new Atividade
@@ -107,7 +123,7 @@ namespace Gerenciador_de_Tarefas
                     ClearForm();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao editar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -158,7 +174,10 @@ namespace Gerenciador_de_Tarefas
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            btnDeletar = new Button();
+            btnEditar = new Button();
             btnSalvar = new Button();
             dataGridViewAtividades = new DataGridView();
             checkBoxExecucao = new CheckBox();
@@ -171,17 +190,15 @@ namespace Gerenciador_de_Tarefas
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            btnEditar = new Button();
-            btnDeletar = new Button();
-            button1 = new Button();
+            atividadeBindingSource = new BindingSource(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)atividadeBindingSource).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.Control;
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(btnDeletar);
             panel1.Controls.Add(btnEditar);
             panel1.Controls.Add(btnSalvar);
@@ -202,10 +219,30 @@ namespace Gerenciador_de_Tarefas
             panel1.Size = new Size(1075, 493);
             panel1.TabIndex = 2;
             // 
+            // btnDeletar
+            // 
+            btnDeletar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeletar.Location = new Point(965, 425);
+            btnDeletar.Name = "btnDeletar";
+            btnDeletar.Size = new Size(98, 44);
+            btnDeletar.TabIndex = 14;
+            btnDeletar.Text = "Deletar";
+            btnDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEditar.Location = new Point(861, 425);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(98, 44);
+            btnEditar.TabIndex = 13;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
+            // 
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSalvar.Location = new Point(357, 362);
+            btnSalvar.Location = new Point(357, 366);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(98, 44);
             btnSalvar.TabIndex = 12;
@@ -316,25 +353,9 @@ namespace Gerenciador_de_Tarefas
             label1.TabIndex = 0;
             label1.Text = "AGENDADOR DE TAREFAS";
             // 
-            // btnEditar
+            // atividadeBindingSource
             // 
-            btnEditar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnEditar.Location = new Point(861, 425);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(98, 44);
-            btnEditar.TabIndex = 13;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            // 
-            // btnDeletar
-            // 
-            btnDeletar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDeletar.Location = new Point(965, 425);
-            btnDeletar.Name = "btnDeletar";
-            btnDeletar.Size = new Size(98, 44);
-            btnDeletar.TabIndex = 14;
-            btnDeletar.Text = "Deletar";
-            btnDeletar.UseVisualStyleBackColor = true;
+            atividadeBindingSource.DataSource = typeof(Atividade);
             // 
             // AgendamentoApp
             // 
@@ -344,6 +365,7 @@ namespace Gerenciador_de_Tarefas
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).EndInit();
+            ((System.ComponentModel.ISupportInitialize)atividadeBindingSource).EndInit();
             ResumeLayout(false);
         }
     }
