@@ -78,7 +78,7 @@ namespace Gerenciador_de_Tarefas
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao salvar a tarefa!! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
