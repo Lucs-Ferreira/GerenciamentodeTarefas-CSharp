@@ -27,16 +27,25 @@ namespace Gerenciador_de_Tarefas
         private Button btnDeletar;
         private Button btnEditar;
         private Button button1;
+        private BindingSource atividadeBindingSource;
+        private System.ComponentModel.IContainer components;
         private AgendamentoRepository repository;
 
+        public static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new AgendamentoApp());
+        }
         public AgendamentoApp()
         {
             InitializeComponent();
-            string connectionString = "string do banco de dados";
+            string connectionString = "Data Source=LUCAS\\SQLSERVER2022;Initial Catalog=master;Integrated Security=True";
             try
             {
                 repository = new AgendamentoRepository(connectionString);
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -68,7 +77,8 @@ namespace Gerenciador_de_Tarefas
                 repository.AdicionarAtividade(atividade);
                 RefreshDataGrid();
                 ClearForm();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao salvar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -90,7 +100,8 @@ namespace Gerenciador_de_Tarefas
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            try { 
+            try
+            {
                 if (dataGridViewAtividades.SelectedRows.Count > 0)
                 {
                     Atividade atividade = new Atividade
@@ -107,7 +118,7 @@ namespace Gerenciador_de_Tarefas
                     ClearForm();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Erro ao editar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -158,7 +169,11 @@ namespace Gerenciador_de_Tarefas
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            button1 = new Button();
+            btnDeletar = new Button();
+            btnEditar = new Button();
             btnSalvar = new Button();
             dataGridViewAtividades = new DataGridView();
             checkBoxExecucao = new CheckBox();
@@ -171,11 +186,10 @@ namespace Gerenciador_de_Tarefas
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            btnEditar = new Button();
-            btnDeletar = new Button();
-            button1 = new Button();
+            atividadeBindingSource = new BindingSource(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)atividadeBindingSource).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -201,6 +215,33 @@ namespace Gerenciador_de_Tarefas
             panel1.Name = "panel1";
             panel1.Size = new Size(1075, 493);
             panel1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(0, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 0;
+            // 
+            // btnDeletar
+            // 
+            btnDeletar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDeletar.Location = new Point(965, 425);
+            btnDeletar.Name = "btnDeletar";
+            btnDeletar.Size = new Size(98, 44);
+            btnDeletar.TabIndex = 14;
+            btnDeletar.Text = "Deletar";
+            btnDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEditar.Location = new Point(861, 425);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(98, 44);
+            btnEditar.TabIndex = 13;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = true;
             // 
             // btnSalvar
             // 
@@ -228,7 +269,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxExecucao.AutoSize = true;
             checkBoxExecucao.Location = new Point(342, 262);
             checkBoxExecucao.Name = "checkBoxExecucao";
-            checkBoxExecucao.Size = new Size(130, 24);
+            checkBoxExecucao.Size = new Size(106, 19);
             checkBoxExecucao.TabIndex = 10;
             checkBoxExecucao.Tag = "2";
             checkBoxExecucao.Text = "EM EXECUÇÃO";
@@ -239,7 +280,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxConcluida.AutoSize = true;
             checkBoxConcluida.Location = new Point(342, 288);
             checkBoxConcluida.Name = "checkBoxConcluida";
-            checkBoxConcluida.Size = new Size(113, 24);
+            checkBoxConcluida.Size = new Size(93, 19);
             checkBoxConcluida.TabIndex = 9;
             checkBoxConcluida.Tag = "1";
             checkBoxConcluida.Text = "CONCLUIDA";
@@ -263,7 +304,7 @@ namespace Gerenciador_de_Tarefas
             // 
             txtNome.Location = new Point(17, 92);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(462, 27);
+            txtNome.Size = new Size(462, 23);
             txtNome.TabIndex = 5;
             // 
             // label5
@@ -272,7 +313,7 @@ namespace Gerenciador_de_Tarefas
             label5.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(342, 227);
             label5.Name = "label5";
-            label5.Size = new Size(133, 26);
+            label5.Size = new Size(109, 21);
             label5.TabIndex = 4;
             label5.Text = "SITUAÇÃO:";
             // 
@@ -282,7 +323,7 @@ namespace Gerenciador_de_Tarefas
             label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(17, 227);
             label4.Name = "label4";
-            label4.Size = new Size(92, 26);
+            label4.Size = new Size(76, 21);
             label4.TabIndex = 3;
             label4.Text = "PRAZO:";
             // 
@@ -292,7 +333,7 @@ namespace Gerenciador_de_Tarefas
             label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(17, 124);
             label3.Name = "label3";
-            label3.Size = new Size(147, 26);
+            label3.Size = new Size(121, 21);
             label3.TabIndex = 2;
             label3.Text = "DESCRIÇÃO:";
             // 
@@ -302,7 +343,7 @@ namespace Gerenciador_de_Tarefas
             label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(17, 63);
             label2.Name = "label2";
-            label2.Size = new Size(83, 26);
+            label2.Size = new Size(68, 21);
             label2.TabIndex = 1;
             label2.Text = "NOME:";
             // 
@@ -312,29 +353,13 @@ namespace Gerenciador_de_Tarefas
             label1.Font = new Font("Times New Roman", 25.8F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(243, 9);
             label1.Name = "label1";
-            label1.Size = new Size(579, 49);
+            label1.Size = new Size(465, 40);
             label1.TabIndex = 0;
             label1.Text = "AGENDADOR DE TAREFAS";
             // 
-            // btnEditar
+            // atividadeBindingSource
             // 
-            btnEditar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnEditar.Location = new Point(861, 425);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(98, 44);
-            btnEditar.TabIndex = 13;
-            btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
-            // 
-            // btnDeletar
-            // 
-            btnDeletar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDeletar.Location = new Point(965, 425);
-            btnDeletar.Name = "btnDeletar";
-            btnDeletar.Size = new Size(98, 44);
-            btnDeletar.TabIndex = 14;
-            btnDeletar.Text = "Deletar";
-            btnDeletar.UseVisualStyleBackColor = true;
+            atividadeBindingSource.DataSource = typeof(Atividade);
             // 
             // AgendamentoApp
             // 
@@ -344,6 +369,7 @@ namespace Gerenciador_de_Tarefas
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).EndInit();
+            ((System.ComponentModel.ISupportInitialize)atividadeBindingSource).EndInit();
             ResumeLayout(false);
         }
     }
