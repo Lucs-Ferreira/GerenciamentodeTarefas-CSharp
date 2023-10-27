@@ -19,7 +19,7 @@ namespace GerenciamentodeTarefas_CSharp
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            
+            ClearForm();
         }
 
         private void ClearForm()
