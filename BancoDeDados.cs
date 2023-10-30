@@ -1,7 +1,9 @@
-﻿using System;
+﻿using GerenciamentodeTarefas;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +11,6 @@ namespace Gerenciador_de_Tarefas
 {
     public class AgendamentoRepository
     {
-      
         private readonly string connectionString;
 
         public AgendamentoRepository(string connectionString)
@@ -21,26 +22,28 @@ namespace Gerenciador_de_Tarefas
         {
             List<Atividade> atividades = new List<Atividade>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
             {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
                 connection.Open();
 
                 string query = "SELECT * FROM atividades";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (Microsoft.Data.Sqlite.SqliteDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Atividade atividade = new Atividade
                             {
-                                id = Convert.ToInt32(reader["ID"]),
-                                nome = reader["Nome"].ToString(),
-                                descricao = reader["Descricao"].ToString(),
-                                prazo = Convert.ToDateTime(reader["Data"])
+                                id = Convert.ToInt32(reader["id"]),
+                                nome = reader["nome"].ToString(),
+                                descricao = reader["descricao"].ToString(),
+                                prazo = Convert.ToDateTime(reader["prazo"])
                             };
 
-                            if (int.TryParse(reader["Concluida"].ToString(), out int situacao))
+                            if (int.TryParse(reader["situacao"].ToString(), out int situacao))
                             {
                                 atividade.situacao = situacao;
                             }
@@ -62,16 +65,18 @@ namespace Gerenciador_de_Tarefas
 
         public void AdicionarAtividade(Atividade atividade)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
             {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
                 connection.Open();
 
-                string query = "INSERT INTO atividades (Nome, Descricao, Data, situacao) VALUES (@Nome, @Descricao, @Data, @situacao)";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = "INSERT INTO atividades (nome, descricao, prazo, situacao) VALUES (@Nome, @Descricao, @Prazo, @situacao)";
+                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nome", atividade.nome);
                     command.Parameters.AddWithValue("@Descricao", atividade.descricao);
-                    command.Parameters.AddWithValue("@Data", atividade.prazo);
+                    command.Parameters.AddWithValue("@Prazo", atividade.prazo);
                     command.Parameters.AddWithValue("@situacao", atividade.situacao);
                     command.ExecuteNonQuery();
                 }
@@ -80,17 +85,19 @@ namespace Gerenciador_de_Tarefas
 
         public void EditarAtividade(Atividade atividade)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
             {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
                 connection.Open();
 
-                string query = "UPDATE atividades SET Nome = @Nome, Descricao = @Descricao, Data = @Data, Concluida = @Concluida WHERE ID = @ID";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = "UPDATE atividades SET nome = @Nome, descricao = @Descricao, prazo = @Prazo, situacao = @Concluida WHERE id = @ID";
+                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", atividade.id);
                     command.Parameters.AddWithValue("@Nome", atividade.nome);
                     command.Parameters.AddWithValue("@Descricao", atividade.descricao);
-                    command.Parameters.AddWithValue("@Data", atividade.prazo);
+                    command.Parameters.AddWithValue("@Prazo", atividade.prazo);
                     command.Parameters.AddWithValue("@Concluida", atividade.situacao);
                     command.ExecuteNonQuery();
                 }
@@ -99,18 +106,147 @@ namespace Gerenciador_de_Tarefas
 
         public void ExcluirAtividade(int id)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
             {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
                 connection.Open();
 
-                string query = "DELETE FROM atividades WHERE ID = @ID";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = "DELETE FROM atividades WHERE id = @ID";
+                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", id);
                     command.ExecuteNonQuery();
                 }
             }
         }
-    }
 
+        public void NovoUsuario(Usuarios u)
+        {
+            if (existeUsername(u))
+            {
+                MessageBox.Show("Username já existe!!");
+                return;
+            }
+            try
+            {
+                using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+                {
+                    SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                    connection.Open();
+
+                    string query = "INSERT INTO tb_usuarios (C_USERNAME, C_SENHA) VALUES (@username, @senha)";
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", u.cadastroUsername);
+                        command.Parameters.AddWithValue("@senha", u.cadastroSenha);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Novo usuário inserido com sucesso!");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao inserir dados de usuario " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public bool existeUsername(Usuarios u)
+        {
+            bool res = false;
+            using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+            {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                connection.Open();
+
+                string query = "SELECT C_USERNAME FROM tb_usuarios WHERE C_USERNAME = @Username";
+                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", u.cadastroUsername);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            res = true;
+                        }
+                    }
+                }
+
+                return res;
+            }
+        }
+
+        public List<Usuarios> obterTodosUsuarios()
+        {
+            List<Usuarios> usuarios = new List<Usuarios>();
+
+            try
+            {
+                using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+                {
+                    SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                    connection.Open();
+
+                    string query = "SELECT * FROM tb_usuarios";
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Usuarios usuario = new Usuarios
+                                {
+                                    cadastroUsername = reader["C_USERNAME"].ToString(),
+                                    cadastroSenha = reader["C_SENHA"].ToString()
+                                };
+                                usuarios.Add(usuario);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter dados do usuário " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return usuarios;
+        }
+        public DataTable Consulta(string sql)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+                {
+                    SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                    connection.Open();
+
+                    string query = sql;
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                            return dt;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter dados da consulta da tb_usuarios " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return dt; 
+        }
+
+    }
 }

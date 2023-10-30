@@ -31,6 +31,9 @@ namespace Gerenciador_de_Tarefas
         private System.ComponentModel.IContainer components;
         private Button btnCadastro;
         private Button btnLogin;
+        private Panel panel2;
+        private Label label6;
+        public Label lb_nomeUsuario;
         private AgendamentoRepository repository;
 
         public static void Main()
@@ -42,7 +45,9 @@ namespace Gerenciador_de_Tarefas
         public AgendamentoApp()
         {
             InitializeComponent();
-            string connectionString = "Data Source=C:\\Users\\suporte\\Desktop\\bd\\gerenciadorTarefas.db";
+            loginForm loginForm = new loginForm(this);
+            loginForm.ShowDialog();
+            string connectionString = "Data Source=C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Nova pasta\\GerenciamentodeTarefas-CSharp-master\\bd\\gerenciadorTarefas.db";
             try
             {
                 repository = new AgendamentoRepository(connectionString);
@@ -150,6 +155,7 @@ namespace Gerenciador_de_Tarefas
             }
         }
 
+
         private void dataGridViewAtividades_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridViewAtividades.SelectedRows.Count > 0)
@@ -179,7 +185,7 @@ namespace Gerenciador_de_Tarefas
         {
             try
             {
-                loginForm loginForm = new loginForm();
+                loginForm loginForm = new loginForm(this);
                 loginForm.ShowDialog();
             }
             catch (Exception ex)
@@ -192,7 +198,7 @@ namespace Gerenciador_de_Tarefas
         {
             try
             {
-                cadastroForm cadastroForm = new cadastroForm();
+                cadastroForm cadastroForm = new cadastroForm(repository);
                 cadastroForm.ShowDialog();
             }
             catch (Exception ex)
@@ -205,6 +211,8 @@ namespace Gerenciador_de_Tarefas
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            panel2 = new Panel();
+            label6 = new Label();
             btnCadastro = new Button();
             btnLogin = new Button();
             btnDeletar = new Button();
@@ -222,7 +230,9 @@ namespace Gerenciador_de_Tarefas
             label2 = new Label();
             label1 = new Label();
             atividadeBindingSource = new BindingSource(components);
+            lb_nomeUsuario = new Label();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).BeginInit();
             ((System.ComponentModel.ISupportInitialize)atividadeBindingSource).BeginInit();
             SuspendLayout();
@@ -230,6 +240,7 @@ namespace Gerenciador_de_Tarefas
             // panel1
             // 
             panel1.BackColor = SystemColors.Control;
+            panel1.Controls.Add(panel2);
             panel1.Controls.Add(btnCadastro);
             panel1.Controls.Add(btnLogin);
             panel1.Controls.Add(btnDeletar);
@@ -251,6 +262,26 @@ namespace Gerenciador_de_Tarefas
             panel1.Name = "panel1";
             panel1.Size = new Size(1075, 493);
             panel1.TabIndex = 2;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = SystemColors.ActiveBorder;
+            panel2.Controls.Add(lb_nomeUsuario);
+            panel2.Controls.Add(label6);
+            panel2.Location = new Point(0, 459);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(173, 34);
+            panel2.TabIndex = 17;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(3, 10);
+            label6.Name = "label6";
+            label6.Size = new Size(63, 19);
+            label6.TabIndex = 1;
+            label6.Text = "Usuário: ";
             // 
             // btnCadastro
             // 
@@ -320,7 +351,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxExecucao.AutoSize = true;
             checkBoxExecucao.Location = new Point(342, 262);
             checkBoxExecucao.Name = "checkBoxExecucao";
-            checkBoxExecucao.Size = new Size(130, 24);
+            checkBoxExecucao.Size = new Size(106, 19);
             checkBoxExecucao.TabIndex = 10;
             checkBoxExecucao.Tag = "2";
             checkBoxExecucao.Text = "EM EXECUÇÃO";
@@ -331,7 +362,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxConcluida.AutoSize = true;
             checkBoxConcluida.Location = new Point(342, 288);
             checkBoxConcluida.Name = "checkBoxConcluida";
-            checkBoxConcluida.Size = new Size(113, 24);
+            checkBoxConcluida.Size = new Size(93, 19);
             checkBoxConcluida.TabIndex = 9;
             checkBoxConcluida.Tag = "1";
             checkBoxConcluida.Text = "CONCLUIDA";
@@ -355,7 +386,7 @@ namespace Gerenciador_de_Tarefas
             // 
             txtNome.Location = new Point(17, 92);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(462, 27);
+            txtNome.Size = new Size(462, 23);
             txtNome.TabIndex = 5;
             // 
             // label5
@@ -364,7 +395,7 @@ namespace Gerenciador_de_Tarefas
             label5.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(342, 227);
             label5.Name = "label5";
-            label5.Size = new Size(133, 26);
+            label5.Size = new Size(109, 21);
             label5.TabIndex = 4;
             label5.Text = "SITUAÇÃO:";
             // 
@@ -374,7 +405,7 @@ namespace Gerenciador_de_Tarefas
             label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(17, 227);
             label4.Name = "label4";
-            label4.Size = new Size(92, 26);
+            label4.Size = new Size(76, 21);
             label4.TabIndex = 3;
             label4.Text = "PRAZO:";
             // 
@@ -384,7 +415,7 @@ namespace Gerenciador_de_Tarefas
             label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(17, 124);
             label3.Name = "label3";
-            label3.Size = new Size(147, 26);
+            label3.Size = new Size(121, 21);
             label3.TabIndex = 2;
             label3.Text = "DESCRIÇÃO:";
             // 
@@ -394,7 +425,7 @@ namespace Gerenciador_de_Tarefas
             label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(17, 63);
             label2.Name = "label2";
-            label2.Size = new Size(83, 26);
+            label2.Size = new Size(68, 21);
             label2.TabIndex = 1;
             label2.Text = "NOME:";
             // 
@@ -404,7 +435,7 @@ namespace Gerenciador_de_Tarefas
             label1.Font = new Font("Times New Roman", 25.8F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(243, 9);
             label1.Name = "label1";
-            label1.Size = new Size(579, 49);
+            label1.Size = new Size(465, 40);
             label1.TabIndex = 0;
             label1.Text = "AGENDADOR DE TAREFAS";
             // 
@@ -412,14 +443,27 @@ namespace Gerenciador_de_Tarefas
             // 
             atividadeBindingSource.DataSource = typeof(Atividade);
             // 
+            // lb_nomeUsuario
+            // 
+            lb_nomeUsuario.AutoSize = true;
+            lb_nomeUsuario.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lb_nomeUsuario.Location = new Point(62, 10);
+            lb_nomeUsuario.Name = "lb_nomeUsuario";
+            lb_nomeUsuario.Size = new Size(33, 19);
+            lb_nomeUsuario.TabIndex = 2;
+            lb_nomeUsuario.Text = "----";
+            // 
             // AgendamentoApp
             // 
             ClientSize = new Size(1075, 493);
             Controls.Add(panel1);
             Name = "AgendamentoApp";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Agendador de Tarefas";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtividades).EndInit();
             ((System.ComponentModel.ISupportInitialize)atividadeBindingSource).EndInit();
             ResumeLayout(false);

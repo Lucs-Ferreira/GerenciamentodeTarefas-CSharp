@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            usernameLoginText = new TextBox();
             username = new Label();
             senha = new Label();
-            textBox2 = new TextBox();
+            senhaLoginText = new TextBox();
             btnSalvarLogin = new Button();
             btnCancelarLogin = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // usernameLoginText
             // 
-            textBox1.Location = new Point(12, 34);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(174, 23);
-            textBox1.TabIndex = 0;
+            usernameLoginText.Location = new Point(12, 34);
+            usernameLoginText.Name = "usernameLoginText";
+            usernameLoginText.Size = new Size(174, 23);
+            usernameLoginText.TabIndex = 0;
             // 
             // username
             // 
@@ -63,12 +63,13 @@
             senha.TabIndex = 2;
             senha.Text = "Senha";
             // 
-            // textBox2
+            // senhaLoginText
             // 
-            textBox2.Location = new Point(12, 97);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(174, 23);
-            textBox2.TabIndex = 3;
+            senhaLoginText.Location = new Point(12, 97);
+            senhaLoginText.Name = "senhaLoginText";
+            senhaLoginText.PasswordChar = '*';
+            senhaLoginText.Size = new Size(174, 23);
+            senhaLoginText.TabIndex = 3;
             // 
             // btnSalvarLogin
             // 
@@ -78,6 +79,7 @@
             btnSalvarLogin.TabIndex = 4;
             btnSalvarLogin.Text = "Logar";
             btnSalvarLogin.UseVisualStyleBackColor = true;
+            btnSalvarLogin.Click += btnSalvarLogin_Click;
             // 
             // btnCancelarLogin
             // 
@@ -96,11 +98,15 @@
             ClientSize = new Size(195, 240);
             Controls.Add(btnCancelarLogin);
             Controls.Add(btnSalvarLogin);
-            Controls.Add(textBox2);
+            Controls.Add(senhaLoginText);
             Controls.Add(senha);
             Controls.Add(username);
-            Controls.Add(textBox1);
+            Controls.Add(usernameLoginText);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "loginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             ResumeLayout(false);
             PerformLayout();
@@ -108,10 +114,10 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox usernameLoginText;
         private Label username;
         private Label senha;
-        private TextBox textBox2;
+        private TextBox senhaLoginText;
         private Button btnSalvarLogin;
         private Button btnCancelarLogin;
     }

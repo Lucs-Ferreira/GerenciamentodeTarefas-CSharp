@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GerenciamentodeTarefas_CSharp
+namespace GerenciamentodeTarefas
 {
-     class Usuarios
+    public class Usuarios
     {
-        public int idUsuarios;
+        public int idUsuarios { get; set; }
+        public string cadastroUsername { get; set; }
+        public string cadastroSenha { get; set; }
 
-        public string cadastroUsername;
-
-        public string cadastroSenha;
+        public bool logado = false;
     }
+
 }

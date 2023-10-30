@@ -32,7 +32,7 @@
             txtUsernameCadastro = new TextBox();
             label3 = new Label();
             panel1 = new Panel();
-            button2 = new Button();
+            btnFechar = new Button();
             btnCancelar = new Button();
             btnSalvarCadastro = new Button();
             txtSenhaCadastro = new TextBox();
@@ -68,7 +68,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnFechar);
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnSalvarCadastro);
             panel1.Dock = DockStyle.Bottom;
@@ -77,15 +77,16 @@
             panel1.Size = new Size(347, 53);
             panel1.TabIndex = 11;
             // 
-            // button2
+            // btnFechar
             // 
-            button2.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(248, 0);
-            button2.Name = "button2";
-            button2.Size = new Size(80, 39);
-            button2.TabIndex = 2;
-            button2.Text = "Salvar";
-            button2.UseVisualStyleBackColor = true;
+            btnFechar.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnFechar.Location = new Point(248, 0);
+            btnFechar.Name = "btnFechar";
+            btnFechar.Size = new Size(80, 39);
+            btnFechar.TabIndex = 2;
+            btnFechar.Text = "Fechar";
+            btnFechar.UseVisualStyleBackColor = true;
+            btnFechar.Click += btnFechar_Click;
             // 
             // btnCancelar
             // 
@@ -113,6 +114,7 @@
             // 
             txtSenhaCadastro.Location = new Point(182, 33);
             txtSenhaCadastro.Name = "txtSenhaCadastro";
+            txtSenhaCadastro.PasswordChar = '*';
             txtSenhaCadastro.Size = new Size(146, 23);
             txtSenhaCadastro.TabIndex = 12;
             // 
@@ -127,6 +129,7 @@
             Controls.Add(txtUsernameCadastro);
             Controls.Add(label2);
             Name = "cadastroForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
@@ -140,7 +143,7 @@
         private Panel panel1;
         private Button btnSalvarCadastro;
         private TextBox txtSenhaCadastro;
-        private Button button2;
+        private Button btnFechar;
         private Button btnCancelar;
     }
 }

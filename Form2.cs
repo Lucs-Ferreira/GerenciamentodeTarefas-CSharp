@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Gerenciador_de_Tarefas;
+using GerenciamentodeTarefas;
+using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,25 +15,36 @@ namespace GerenciamentodeTarefas_CSharp
 {
     public partial class cadastroForm : Form
     {
-        public cadastroForm()
+        private AgendamentoRepository repository;
+
+        public cadastroForm(AgendamentoRepository repository)
         {
             InitializeComponent();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            ClearForm();
-        }
-
-        private void ClearForm()
-        {
-            txtUsernameCadastro.Clear();
-            txtSenhaCadastro.Clear();
+            this.repository = repository;
         }
 
         private void btnSalvarCadastro_Click(object sender, EventArgs e)
         {
-           
+            Usuarios usuario = new Usuarios();
+            usuario.cadastroUsername = txtUsernameCadastro.Text;
+            usuario.cadastroSenha = txtSenhaCadastro.Text;
+            repository.NovoUsuario(usuario);
+            clearForm();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            clearForm();
+        }
+
+        private void clearForm()
+        {
+            txtUsernameCadastro.Clear();
+            txtSenhaCadastro.Clear();
+        }
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
