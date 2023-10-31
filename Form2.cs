@@ -28,6 +28,7 @@ namespace GerenciamentodeTarefas_CSharp
             Usuarios usuario = new Usuarios();
             usuario.cadastroUsername = txtUsernameCadastro.Text;
             usuario.cadastroSenha = txtSenhaCadastro.Text;
+            usuario.nivel = Convert.ToInt32(Math.Round(n_nivel.Value, 0));
             repository.NovoUsuario(usuario);
             clearForm();
         }

@@ -11,8 +11,11 @@ namespace GerenciamentodeTarefas
         public int idUsuarios { get; set; }
         public string cadastroUsername { get; set; }
         public string cadastroSenha { get; set; }
+           
+        public Int32 nivel { get; set; }
 
-        public bool logado = false;
+        public static int acesso = 0;
+        public static Boolean logado = false;
     }
 
 }

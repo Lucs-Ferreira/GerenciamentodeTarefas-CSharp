@@ -36,7 +36,10 @@
             btnCancelar = new Button();
             btnSalvarCadastro = new Button();
             txtSenhaCadastro = new TextBox();
+            n_nivel = new NumericUpDown();
+            label1 = new Label();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)n_nivel).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -72,15 +75,15 @@
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnSalvarCadastro);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 78);
+            panel1.Location = new Point(0, 71);
             panel1.Name = "panel1";
-            panel1.Size = new Size(347, 53);
+            panel1.Size = new Size(493, 53);
             panel1.TabIndex = 11;
             // 
             // btnFechar
             // 
             btnFechar.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFechar.Location = new Point(248, 0);
+            btnFechar.Location = new Point(401, 0);
             btnFechar.Name = "btnFechar";
             btnFechar.Size = new Size(80, 39);
             btnFechar.TabIndex = 2;
@@ -118,11 +121,31 @@
             txtSenhaCadastro.Size = new Size(146, 23);
             txtSenhaCadastro.TabIndex = 12;
             // 
+            // n_nivel
+            // 
+            n_nivel.Location = new Point(361, 33);
+            n_nivel.Maximum = new decimal(new int[] { 3, 0, 0, 0 });
+            n_nivel.Name = "n_nivel";
+            n_nivel.Size = new Size(120, 23);
+            n_nivel.TabIndex = 13;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(361, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 21);
+            label1.TabIndex = 14;
+            label1.Text = "Acesso";
+            // 
             // cadastroForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(347, 131);
+            ClientSize = new Size(493, 124);
+            Controls.Add(label1);
+            Controls.Add(n_nivel);
             Controls.Add(txtSenhaCadastro);
             Controls.Add(panel1);
             Controls.Add(label3);
@@ -132,6 +155,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)n_nivel).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +169,7 @@
         private TextBox txtSenhaCadastro;
         private Button btnFechar;
         private Button btnCancelar;
+        private NumericUpDown n_nivel;
+        private Label label1;
     }
 }

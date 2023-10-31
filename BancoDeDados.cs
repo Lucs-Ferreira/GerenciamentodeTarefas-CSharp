@@ -136,11 +136,12 @@ namespace Gerenciador_de_Tarefas
 
                     connection.Open();
 
-                    string query = "INSERT INTO tb_usuarios (C_USERNAME, C_SENHA) VALUES (@username, @senha)";
+                    string query = "INSERT INTO tb_usuarios (C_USERNAME, C_SENHA, C_ACESSO) VALUES (@username, @senha, @acesso)";
                     using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@username", u.cadastroUsername);
                         command.Parameters.AddWithValue("@senha", u.cadastroSenha);
+                        command.Parameters.AddWithValue("@acesso", u.nivel);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Novo usuário inserido com sucesso!");
 
@@ -234,19 +235,21 @@ namespace Gerenciador_de_Tarefas
                     {
                         using (var reader = command.ExecuteReader())
                         {
-                            dt.Load(reader);
-                            return dt;
+                            dt.Load(reader); // Carregar os resultados na DataTable
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao obter dados da consulta da tb_usuarios " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao obter dados da consulta: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return dt; 
+            return dt;
         }
 
     }
+
+
 }
+
