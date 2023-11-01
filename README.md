@@ -10,11 +10,11 @@ Esses níveis de acesso são distribuídos da seguinte forma: nível 0 correspon
 nível 2 engloba os editores avançados, que têm a capacidade de salvar, editar e excluir tarefas; por fim, nível 3 designa os gerentes, que podem cadastrar novos usuários, além de possuir as mesmas permissões dos níveis de acesso anteriores."
 ## As interfarces
 ### Tela para agendamento de tarefas
-![Tela para agendar tarefas](https://uploaddeimagens.com.br/imagens/oiOKKyY)
+![Tela para agendar tarefas](https://uploaddeimagens.com.br/images/004/653/421/original/Screenshot_4.png?1698847515)
 ### Tela de login
-![Tela para login de usúarios](https://uploaddeimagens.com.br/imagens/yRxoz9o)
+![Tela para login de usúarios](https://uploaddeimagens.com.br/images/004/653/424/original/Screenshot_1.png?1698847572)
 ### Tela para cadastro de novos usuários
-![Tela Cadastro de usuários](https://uploaddeimagens.com.br/imagens/0fSsP_0)
+![Tela Cadastro de usuários](https://uploaddeimagens.com.br/images/004/653/425/original/Screenshot_2.png?1698847594)
 
 ## Autores
 
