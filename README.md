@@ -25,6 +25,9 @@ nível 2 engloba os editores avançados, que têm a capacidade de salvar, editar
   <tr>
     <td align="center"><a href="https://github.com/LucasFernandesF"><img src="https://avatars.githubusercontent.com/u/103151835?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Fernandes</b></sub></a><br /> <a>622122322</a></td>
     <td align="center"><a href="https://github.com/Lucs-Ferreira"><img src="https://avatars.githubusercontent.com/u/143045510?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Ferreira</b></sub></a><br /> <a>622220003</a></td>
+    <td align="center"><a href="https://github.com/kauanfj1"><img src="https://avatars.githubusercontent.com/u/143045542?v=4" width="100px;" alt=""/><br /><sub><b>Kauan Fernandes</b></sub></a><br /> <a>622220683</a></td>
+    <td align="center"><a href="https://github.com/DiguPS"><img src="https://avatars.githubusercontent.com/u/118864099?v=4" width="100px;" alt=""/><br /><sub><b>Diego Pinheiro</b></sub></a><br /> <a>622221025</a></td>
+    <td align="center"><a href="https://github.com/DiguPS"><img src="https://avatars.githubusercontent.com/u/118864099?v=4" width="100px;" alt=""/><br /><sub><b>Diego Pinheiro</b></sub></a><br /> <a>622221025</a></td>
   </tr>
 <table
 <!-- markdownlint-restore -->
