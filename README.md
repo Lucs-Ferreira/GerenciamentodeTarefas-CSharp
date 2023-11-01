@@ -25,6 +25,9 @@ nível 2 engloba os editores avançados, que têm a capacidade de salvar, editar
   <tr>
     <td align="center"><a href="https://github.com/LucasFernandesF"><img src="https://avatars.githubusercontent.com/u/103151835?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Fernandes</b></sub></a><br /> <a>622122322</a></td>
   <tr>
+     <tr>
+    <td align="center"><a href="https://github.com/Lucs-Ferreira"><img src="https://avatars.githubusercontent.com/u/143045510?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Ferreira</b></sub></a><br /> <a>622220003</a></td>
+  <tr>
 <table
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
