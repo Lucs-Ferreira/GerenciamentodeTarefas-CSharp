@@ -235,7 +235,7 @@ namespace Gerenciador_de_Tarefas
                     {
                         using (var reader = command.ExecuteReader())
                         {
-                            dt.Load(reader); // Carregar os resultados na DataTable
+                            dt.Load(reader); 
                         }
                     }
                 }

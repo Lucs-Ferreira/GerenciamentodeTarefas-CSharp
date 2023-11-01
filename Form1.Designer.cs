@@ -28,44 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loginForm));
             usernameLoginText = new TextBox();
-            username = new Label();
-            senha = new Label();
             senhaLoginText = new TextBox();
             btnSalvarLogin = new Button();
             btnCancelarLogin = new Button();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // usernameLoginText
             // 
-            usernameLoginText.Location = new Point(12, 34);
+            usernameLoginText.BackColor = SystemColors.InactiveCaption;
+            usernameLoginText.Location = new Point(560, 122);
             usernameLoginText.Name = "usernameLoginText";
             usernameLoginText.Size = new Size(174, 23);
             usernameLoginText.TabIndex = 0;
             // 
-            // username
-            // 
-            username.AutoSize = true;
-            username.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            username.Location = new Point(12, 12);
-            username.Name = "username";
-            username.Size = new Size(70, 19);
-            username.TabIndex = 1;
-            username.Text = "Username";
-            // 
-            // senha
-            // 
-            senha.AutoSize = true;
-            senha.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            senha.Location = new Point(12, 75);
-            senha.Name = "senha";
-            senha.Size = new Size(46, 19);
-            senha.TabIndex = 2;
-            senha.Text = "Senha";
-            // 
             // senhaLoginText
             // 
-            senhaLoginText.Location = new Point(12, 97);
+            senhaLoginText.BackColor = SystemColors.InactiveCaption;
+            senhaLoginText.Location = new Point(560, 194);
             senhaLoginText.Name = "senhaLoginText";
             senhaLoginText.PasswordChar = '*';
             senhaLoginText.Size = new Size(174, 23);
@@ -73,7 +57,7 @@
             // 
             // btnSalvarLogin
             // 
-            btnSalvarLogin.Location = new Point(30, 141);
+            btnSalvarLogin.Location = new Point(584, 237);
             btnSalvarLogin.Name = "btnSalvarLogin";
             btnSalvarLogin.Size = new Size(138, 37);
             btnSalvarLogin.TabIndex = 4;
@@ -83,7 +67,7 @@
             // 
             // btnCancelarLogin
             // 
-            btnCancelarLogin.Location = new Point(30, 184);
+            btnCancelarLogin.Location = new Point(584, 280);
             btnCancelarLogin.Name = "btnCancelarLogin";
             btnCancelarLogin.Size = new Size(138, 37);
             btnCancelarLogin.TabIndex = 6;
@@ -91,23 +75,43 @@
             btnCancelarLogin.UseVisualStyleBackColor = true;
             btnCancelarLogin.Click += btnCancelarLogin_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, -77);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(542, 384);
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Courier New", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(560, 45);
+            label1.Name = "label1";
+            label1.Size = new Size(167, 32);
+            label1.TabIndex = 8;
+            label1.Text = "Bem Vindo";
+            // 
             // loginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(195, 240);
+            BackColor = SystemColors.ButtonHighlight;
+            ClientSize = new Size(775, 328);
+            Controls.Add(label1);
+            Controls.Add(pictureBox1);
             Controls.Add(btnCancelarLogin);
             Controls.Add(btnSalvarLogin);
             Controls.Add(senhaLoginText);
-            Controls.Add(senha);
-            Controls.Add(username);
             Controls.Add(usernameLoginText);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "loginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -115,10 +119,10 @@
         #endregion
 
         private TextBox usernameLoginText;
-        private Label username;
-        private Label senha;
         private TextBox senhaLoginText;
         private Button btnSalvarLogin;
         private Button btnCancelarLogin;
+        private PictureBox pictureBox1;
+        private Label label1;
     }
 }

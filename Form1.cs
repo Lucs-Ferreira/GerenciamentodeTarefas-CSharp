@@ -16,7 +16,7 @@ namespace GerenciamentodeTarefas_CSharp
     {
         string connectionString = "Data Source=C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Nova pasta\\GerenciamentodeTarefas-CSharp-master\\bd\\gerenciadorTarefas.db";
 
-        AgendamentoApp agendamentoApp;   
+        AgendamentoApp agendamentoApp;
 
         DataTable dt = new DataTable();
 
@@ -37,7 +37,7 @@ namespace GerenciamentodeTarefas_CSharp
         {
             string username = usernameLoginText.Text;
             string senha = senhaLoginText.Text;
-            
+
             if (username == "" || senha == "")
             {
                 MessageBox.Show("Usuario e/ou senha inválidas!");
