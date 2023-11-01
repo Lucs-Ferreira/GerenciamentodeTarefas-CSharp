@@ -1,6 +1,9 @@
-﻿using System;
+﻿using GerenciamentodeTarefas;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -117,5 +120,136 @@ namespace Gerenciador_de_Tarefas
                 }
             }
         }
+
+        public void NovoUsuario(Usuarios u)
+        {
+            if (existeUsername(u))
+            {
+                MessageBox.Show("Username já existe!!");
+                return;
+            }
+            try
+            {
+                using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+                {
+                    SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                    connection.Open();
+
+                    string query = "INSERT INTO tb_usuarios (C_USERNAME, C_SENHA, C_ACESSO) VALUES (@username, @senha, @acesso)";
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", u.cadastroUsername);
+                        command.Parameters.AddWithValue("@senha", u.cadastroSenha);
+                        command.Parameters.AddWithValue("@acesso", u.nivel);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Novo usuário inserido com sucesso!");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao inserir dados de usuario " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public bool existeUsername(Usuarios u)
+        {
+            bool res = false;
+            using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+            {
+                SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                connection.Open();
+
+                string query = "SELECT C_USERNAME FROM tb_usuarios WHERE C_USERNAME = @Username";
+                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", u.cadastroUsername);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            res = true;
+                        }
+                    }
+                }
+
+                return res;
+            }
+        }
+
+        public List<Usuarios> obterTodosUsuarios()
+        {
+            List<Usuarios> usuarios = new List<Usuarios>();
+
+            try
+            {
+                using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+                {
+                    SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                    connection.Open();
+
+                    string query = "SELECT * FROM tb_usuarios";
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Usuarios usuario = new Usuarios
+                                {
+                                    cadastroUsername = reader["C_USERNAME"].ToString(),
+                                    cadastroSenha = reader["C_SENHA"].ToString()
+                                };
+                                usuarios.Add(usuario);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter dados do usuário " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return usuarios;
+        }
+        public DataTable Consulta(string sql)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
+                {
+                    SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
+
+                    connection.Open();
+
+                    string query = sql;
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            dt.Load(reader); 
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao obter dados da consulta: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return dt;
+        }
+
     }
+
+
 }
+
