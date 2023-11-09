@@ -42,6 +42,7 @@ namespace GerenciamentodeTarefas_CSharp
         {
             txtUsernameCadastro.Clear();
             txtSenhaCadastro.Clear();
+            n_nivel.Value = 0;
         }
         private void btnFechar_Click(object sender, EventArgs e)
         {
