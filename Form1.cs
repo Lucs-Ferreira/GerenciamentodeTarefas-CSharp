@@ -14,7 +14,7 @@ namespace GerenciamentodeTarefas_CSharp
 {
     public partial class loginForm : Form
     {
-        string connectionString = "Data Source=C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Nova pasta\\GerenciamentodeTarefas-CSharp-master\\bd\\gerenciadorTarefas.db";
+        string connectionString = "Data Source=C:\\bd\\gerenciadorTarefasAtt.db";
 
         AgendamentoApp agendamentoApp;
 

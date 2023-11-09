@@ -52,7 +52,7 @@ namespace Gerenciador_de_Tarefas
             InitializeComponent();
             loginForm form = new loginForm(this);
             form.ShowDialog();
-            string connectionString = "Data Source=C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\Nova pasta\\GerenciamentodeTarefas-CSharp-master\\bd\\gerenciadorTarefas.db";
+            string connectionString = "Data Source=C:\\bd\\gerenciadorTarefasAtt.db";
             try
             {
                 repository = new AgendamentoRepository(connectionString);
@@ -329,13 +329,13 @@ namespace Gerenciador_de_Tarefas
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1131, 574);
+            panel1.Size = new Size(974, 574);
             panel1.TabIndex = 2;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(315, 41);
+            pictureBox1.Location = new Point(245, 41);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(484, 84);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -350,7 +350,7 @@ namespace Gerenciador_de_Tarefas
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1131, 35);
+            panel3.Size = new Size(974, 35);
             panel3.TabIndex = 19;
             // 
             // btnCadastro
@@ -378,10 +378,10 @@ namespace Gerenciador_de_Tarefas
             // btnAtualizar
             // 
             btnAtualizar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAtualizar.Location = new Point(647, 485);
+            btnAtualizar.Location = new Point(419, 443);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(98, 44);
-            btnAtualizar.TabIndex = 18;
+            btnAtualizar.TabIndex = 7;
             btnAtualizar.Text = "Atualizar";
             btnAtualizar.UseVisualStyleBackColor = true;
             btnAtualizar.Click += btnAtualizar_Click;
@@ -396,7 +396,7 @@ namespace Gerenciador_de_Tarefas
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(0, 540);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1131, 34);
+            panel2.Size = new Size(974, 34);
             panel2.TabIndex = 17;
             // 
             // nivelAcesso
@@ -442,30 +442,30 @@ namespace Gerenciador_de_Tarefas
             // btnDeletar
             // 
             btnDeletar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnDeletar.Location = new Point(992, 485);
+            btnDeletar.Location = new Point(869, 490);
             btnDeletar.Name = "btnDeletar";
             btnDeletar.Size = new Size(98, 44);
-            btnDeletar.TabIndex = 14;
+            btnDeletar.TabIndex = 9;
             btnDeletar.Text = "Deletar";
             btnDeletar.UseVisualStyleBackColor = true;
             // 
             // btnEditar
             // 
             btnEditar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnEditar.Location = new Point(888, 485);
+            btnEditar.Location = new Point(765, 490);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(98, 44);
-            btnEditar.TabIndex = 13;
+            btnEditar.TabIndex = 8;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
             // 
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSalvar.Location = new Point(543, 485);
+            btnSalvar.Location = new Point(315, 443);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(98, 44);
-            btnSalvar.TabIndex = 12;
+            btnSalvar.TabIndex = 6;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
             btnSalvar.Click += btnSalvar_Click;
@@ -474,12 +474,13 @@ namespace Gerenciador_de_Tarefas
             // 
             dataGridViewAtividades.BackgroundColor = SystemColors.ActiveBorder;
             dataGridViewAtividades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAtividades.Location = new Point(544, 126);
+            dataGridViewAtividades.Location = new Point(543, 126);
             dataGridViewAtividades.Name = "dataGridViewAtividades";
             dataGridViewAtividades.RowHeadersWidth = 51;
             dataGridViewAtividades.RowTemplate.Height = 24;
-            dataGridViewAtividades.Size = new Size(548, 353);
+            dataGridViewAtividades.Size = new Size(424, 353);
             dataGridViewAtividades.TabIndex = 11;
+            dataGridViewAtividades.TabStop = false;
             // 
             // checkBoxExecucao
             // 
@@ -487,7 +488,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxExecucao.Location = new Point(369, 325);
             checkBoxExecucao.Name = "checkBoxExecucao";
             checkBoxExecucao.Size = new Size(106, 19);
-            checkBoxExecucao.TabIndex = 10;
+            checkBoxExecucao.TabIndex = 4;
             checkBoxExecucao.Tag = "2";
             checkBoxExecucao.Text = "EM EXECUÇÃO";
             checkBoxExecucao.UseVisualStyleBackColor = true;
@@ -498,7 +499,7 @@ namespace Gerenciador_de_Tarefas
             checkBoxConcluida.Location = new Point(369, 351);
             checkBoxConcluida.Name = "checkBoxConcluida";
             checkBoxConcluida.Size = new Size(93, 19);
-            checkBoxConcluida.TabIndex = 9;
+            checkBoxConcluida.TabIndex = 5;
             checkBoxConcluida.Tag = "1";
             checkBoxConcluida.Text = "CONCLUIDA";
             checkBoxConcluida.UseVisualStyleBackColor = true;
@@ -507,7 +508,7 @@ namespace Gerenciador_de_Tarefas
             // 
             monthCalendarData.Location = new Point(44, 325);
             monthCalendarData.Name = "monthCalendarData";
-            monthCalendarData.TabIndex = 8;
+            monthCalendarData.TabIndex = 3;
             // 
             // txtDescricao
             // 
@@ -516,7 +517,7 @@ namespace Gerenciador_de_Tarefas
             txtDescricao.Multiline = true;
             txtDescricao.Name = "txtDescricao";
             txtDescricao.Size = new Size(462, 62);
-            txtDescricao.TabIndex = 6;
+            txtDescricao.TabIndex = 2;
             // 
             // txtNome
             // 
@@ -524,7 +525,7 @@ namespace Gerenciador_de_Tarefas
             txtNome.Location = new Point(44, 155);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(462, 23);
-            txtNome.TabIndex = 5;
+            txtNome.TabIndex = 1;
             // 
             // label5
             // 
@@ -572,7 +573,7 @@ namespace Gerenciador_de_Tarefas
             // 
             // AgendamentoApp
             // 
-            ClientSize = new Size(1131, 574);
+            ClientSize = new Size(974, 574);
             Controls.Add(panel1);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -594,5 +595,6 @@ namespace Gerenciador_de_Tarefas
         {
             RefreshDataGrid();
         }
+
     }
 }

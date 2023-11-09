@@ -61,7 +61,7 @@
             txtUsernameCadastro.Location = new Point(62, 79);
             txtUsernameCadastro.Name = "txtUsernameCadastro";
             txtUsernameCadastro.Size = new Size(166, 23);
-            txtUsernameCadastro.TabIndex = 3;
+            txtUsernameCadastro.TabIndex = 1;
             // 
             // panel1
             // 
@@ -81,7 +81,7 @@
             btnFechar.Location = new Point(506, 3);
             btnFechar.Name = "btnFechar";
             btnFechar.Size = new Size(80, 39);
-            btnFechar.TabIndex = 2;
+            btnFechar.TabIndex = 6;
             btnFechar.Text = "Fechar";
             btnFechar.UseVisualStyleBackColor = true;
             btnFechar.Click += btnFechar_Click;
@@ -92,7 +92,7 @@
             btnCancelar.Location = new Point(106, 3);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(84, 39);
-            btnCancelar.TabIndex = 1;
+            btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
@@ -103,7 +103,7 @@
             btnSalvarCadastro.Location = new Point(12, 3);
             btnSalvarCadastro.Name = "btnSalvarCadastro";
             btnSalvarCadastro.Size = new Size(80, 39);
-            btnSalvarCadastro.TabIndex = 0;
+            btnSalvarCadastro.TabIndex = 4;
             btnSalvarCadastro.Text = "Salvar";
             btnSalvarCadastro.UseVisualStyleBackColor = true;
             btnSalvarCadastro.Click += btnSalvarCadastro_Click;
@@ -115,7 +115,7 @@
             n_nivel.Maximum = new decimal(new int[] { 3, 0, 0, 0 });
             n_nivel.Name = "n_nivel";
             n_nivel.Size = new Size(166, 23);
-            n_nivel.TabIndex = 13;
+            n_nivel.TabIndex = 3;
             // 
             // label1
             // 
@@ -134,7 +134,7 @@
             txtSenhaCadastro.Name = "txtSenhaCadastro";
             txtSenhaCadastro.PasswordChar = '*';
             txtSenhaCadastro.Size = new Size(166, 23);
-            txtSenhaCadastro.TabIndex = 12;
+            txtSenhaCadastro.TabIndex = 2;
             // 
             // label3
             // 
