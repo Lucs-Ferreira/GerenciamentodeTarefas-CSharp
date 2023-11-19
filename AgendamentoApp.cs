@@ -39,6 +39,7 @@ namespace Gerenciador_de_Tarefas
         public Label lb_nomeUsuario;
         private Label label6;
         private PictureBox pictureBox1;
+        private TextBox txtId;
         private AgendamentoRepository repository;
 
         public static void Main()
@@ -71,7 +72,14 @@ namespace Gerenciador_de_Tarefas
 
         private void RefreshDataGrid()
         {
+            dataGridViewAtividades.RowHeadersVisible = false;
+            dataGridViewAtividades.AutoResizeColumns();
             dataGridViewAtividades.DataSource = repository.ObterTodasAtividades();
+            dataGridViewAtividades.Columns["id"].Width = 30;
+            dataGridViewAtividades.Columns["nome"].Width = 120;
+            dataGridViewAtividades.Columns["descricao"].Width = 150;
+            dataGridViewAtividades.Columns["prazo"].Width = 90;
+            dataGridViewAtividades.Columns["situacao"].Width = 70;
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -130,47 +138,6 @@ namespace Gerenciador_de_Tarefas
             return 0;
         }
 
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            if (Usuarios.logado)
-            {
-                if (Usuarios.acesso >= 1)
-                {
-                    try
-                    {
-                        if (dataGridViewAtividades.SelectedRows.Count > 0)
-                        {
-                            Atividade atividade = new Atividade
-                            {
-                                id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value,
-                                nome = txtNome.Text,
-                                descricao = txtDescricao.Text,
-                                prazo = monthCalendarData.SelectionStart,
-                                situacao = pegarCheckBoxValor()
-                            };
-
-                            repository.EditarAtividade(atividade);
-                            RefreshDataGrid();
-                            ClearForm();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Erro ao editar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("Necessário um nível maior de acesso!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("É necessário ter um usuário logado!");
-            }
-        }
-
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             if (Usuarios.logado)
@@ -201,24 +168,6 @@ namespace Gerenciador_de_Tarefas
             else
             {
                 MessageBox.Show("É necessário ter um usuário logado!");
-            }
-        }
-
-
-        private void dataGridViewAtividades_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dataGridViewAtividades.SelectedRows.Count > 0)
-            {
-                int id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value;
-                string nome = dataGridViewAtividades.SelectedRows[0].Cells["Nome"].Value.ToString();
-                string descricao = dataGridViewAtividades.SelectedRows[0].Cells["Descricao"].Value.ToString();
-                DateTime data = (DateTime)dataGridViewAtividades.SelectedRows[0].Cells["Data"].Value;
-                bool concluida = (bool)dataGridViewAtividades.SelectedRows[0].Cells["Concluida"].Value;
-
-                txtNome.Text = nome;
-                txtDescricao.Text = descricao;
-                monthCalendarData.SetDate(data);
-                checkBoxConcluida.Checked = concluida;
             }
         }
 
@@ -298,6 +247,7 @@ namespace Gerenciador_de_Tarefas
             label3 = new Label();
             label2 = new Label();
             atividadeBindingSource = new BindingSource(components);
+            txtId = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
@@ -309,6 +259,7 @@ namespace Gerenciador_de_Tarefas
             // panel1
             // 
             panel1.BackColor = SystemColors.ButtonHighlight;
+            panel1.Controls.Add(txtId);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(btnAtualizar);
@@ -378,7 +329,7 @@ namespace Gerenciador_de_Tarefas
             // btnAtualizar
             // 
             btnAtualizar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAtualizar.Location = new Point(419, 443);
+            btnAtualizar.Location = new Point(382, 443);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(98, 44);
             btnAtualizar.TabIndex = 7;
@@ -405,7 +356,7 @@ namespace Gerenciador_de_Tarefas
             nivelAcesso.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             nivelAcesso.Location = new Point(254, 6);
             nivelAcesso.Name = "nivelAcesso";
-            nivelAcesso.Size = new Size(17, 19);
+            nivelAcesso.Size = new Size(20, 22);
             nivelAcesso.TabIndex = 4;
             nivelAcesso.Text = "0";
             // 
@@ -415,7 +366,7 @@ namespace Gerenciador_de_Tarefas
             label7.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label7.Location = new Point(176, 6);
             label7.Name = "label7";
-            label7.Size = new Size(88, 18);
+            label7.Size = new Size(106, 22);
             label7.TabIndex = 3;
             label7.Text = "Acesso: ";
             // 
@@ -425,7 +376,7 @@ namespace Gerenciador_de_Tarefas
             lb_nomeUsuario.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_nomeUsuario.Location = new Point(87, 6);
             lb_nomeUsuario.Name = "lb_nomeUsuario";
-            lb_nomeUsuario.Size = new Size(33, 19);
+            lb_nomeUsuario.Size = new Size(38, 22);
             lb_nomeUsuario.TabIndex = 2;
             lb_nomeUsuario.Text = "----";
             // 
@@ -435,7 +386,7 @@ namespace Gerenciador_de_Tarefas
             label6.Font = new Font("Courier New", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(3, 6);
             label6.Name = "label6";
-            label6.Size = new Size(98, 18);
+            label6.Size = new Size(118, 22);
             label6.TabIndex = 1;
             label6.Text = "Usuário: ";
             // 
@@ -458,11 +409,12 @@ namespace Gerenciador_de_Tarefas
             btnEditar.TabIndex = 8;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click_1;
             // 
             // btnSalvar
             // 
             btnSalvar.Font = new Font("Times New Roman", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSalvar.Location = new Point(315, 443);
+            btnSalvar.Location = new Point(278, 443);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(98, 44);
             btnSalvar.TabIndex = 6;
@@ -472,35 +424,38 @@ namespace Gerenciador_de_Tarefas
             // 
             // dataGridViewAtividades
             // 
+            dataGridViewAtividades.AllowUserToAddRows = false;
+            dataGridViewAtividades.AllowUserToDeleteRows = false;
             dataGridViewAtividades.BackgroundColor = SystemColors.ActiveBorder;
             dataGridViewAtividades.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAtividades.Location = new Point(543, 126);
+            dataGridViewAtividades.Location = new Point(486, 126);
             dataGridViewAtividades.Name = "dataGridViewAtividades";
+            dataGridViewAtividades.ReadOnly = true;
             dataGridViewAtividades.RowHeadersWidth = 51;
             dataGridViewAtividades.RowTemplate.Height = 24;
-            dataGridViewAtividades.Size = new Size(424, 353);
+            dataGridViewAtividades.Size = new Size(481, 361);
             dataGridViewAtividades.TabIndex = 11;
             dataGridViewAtividades.TabStop = false;
             // 
             // checkBoxExecucao
             // 
             checkBoxExecucao.AutoSize = true;
-            checkBoxExecucao.Location = new Point(369, 325);
+            checkBoxExecucao.Location = new Point(324, 325);
             checkBoxExecucao.Name = "checkBoxExecucao";
-            checkBoxExecucao.Size = new Size(106, 19);
+            checkBoxExecucao.Size = new Size(130, 24);
             checkBoxExecucao.TabIndex = 4;
-            checkBoxExecucao.Tag = "2";
+            checkBoxExecucao.Tag = "EM EXECUÇÃO";
             checkBoxExecucao.Text = "EM EXECUÇÃO";
             checkBoxExecucao.UseVisualStyleBackColor = true;
             // 
             // checkBoxConcluida
             // 
             checkBoxConcluida.AutoSize = true;
-            checkBoxConcluida.Location = new Point(369, 351);
+            checkBoxConcluida.Location = new Point(324, 351);
             checkBoxConcluida.Name = "checkBoxConcluida";
-            checkBoxConcluida.Size = new Size(93, 19);
+            checkBoxConcluida.Size = new Size(113, 24);
             checkBoxConcluida.TabIndex = 5;
-            checkBoxConcluida.Tag = "1";
+            checkBoxConcluida.Tag = "CONCLUIDA";
             checkBoxConcluida.Text = "CONCLUIDA";
             checkBoxConcluida.UseVisualStyleBackColor = true;
             // 
@@ -516,7 +471,7 @@ namespace Gerenciador_de_Tarefas
             txtDescricao.Location = new Point(44, 216);
             txtDescricao.Multiline = true;
             txtDescricao.Name = "txtDescricao";
-            txtDescricao.Size = new Size(462, 62);
+            txtDescricao.Size = new Size(408, 62);
             txtDescricao.TabIndex = 2;
             // 
             // txtNome
@@ -524,16 +479,16 @@ namespace Gerenciador_de_Tarefas
             txtNome.BackColor = SystemColors.ActiveBorder;
             txtNome.Location = new Point(44, 155);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(462, 23);
+            txtNome.Size = new Size(408, 27);
             txtNome.TabIndex = 1;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Courier New", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(369, 290);
+            label5.Location = new Point(324, 290);
             label5.Name = "label5";
-            label5.Size = new Size(109, 21);
+            label5.Size = new Size(138, 27);
             label5.TabIndex = 4;
             label5.Text = "SITUAÇÃO:";
             // 
@@ -543,7 +498,7 @@ namespace Gerenciador_de_Tarefas
             label4.Font = new Font("Courier New", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(44, 290);
             label4.Name = "label4";
-            label4.Size = new Size(76, 21);
+            label4.Size = new Size(96, 27);
             label4.TabIndex = 3;
             label4.Text = "PRAZO:";
             // 
@@ -553,7 +508,7 @@ namespace Gerenciador_de_Tarefas
             label3.Font = new Font("Courier New", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(44, 187);
             label3.Name = "label3";
-            label3.Size = new Size(120, 21);
+            label3.Size = new Size(152, 27);
             label3.TabIndex = 2;
             label3.Text = "DESCRIÇÃO:";
             // 
@@ -563,13 +518,23 @@ namespace Gerenciador_de_Tarefas
             label2.Font = new Font("Courier New", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(44, 126);
             label2.Name = "label2";
-            label2.Size = new Size(65, 21);
+            label2.Size = new Size(82, 27);
             label2.TabIndex = 1;
             label2.Text = "NOME:";
             // 
             // atividadeBindingSource
             // 
             atividadeBindingSource.DataSource = typeof(Atividade);
+            // 
+            // txtId
+            // 
+            txtId.BackColor = SystemColors.ActiveBorder;
+            txtId.Location = new Point(44, 67);
+            txtId.Name = "txtId";
+            txtId.Size = new Size(61, 27);
+            txtId.TabIndex = 21;
+            txtId.TabStop = false;
+            txtId.Visible = false;
             // 
             // AgendamentoApp
             // 
@@ -580,6 +545,7 @@ namespace Gerenciador_de_Tarefas
             Name = "AgendamentoApp";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Agendador de Tarefas";
+            Load += AgendamentoApp_Load_1;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -593,8 +559,86 @@ namespace Gerenciador_de_Tarefas
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
+            if (Usuarios.logado)
+            {
+                if (Usuarios.acesso >= 1)
+                {
+                    try
+                    {
+                        if (dataGridViewAtividades.SelectedRows.Count > 0)
+                        {
+                            Atividade atividade = new Atividade
+                            {
+                                id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value,
+                                nome = txtNome.Text,
+                                descricao = txtDescricao.Text,
+                                prazo = monthCalendarData.SelectionStart,
+                                situacao = pegarCheckBoxValor()
+                            };
+
+                            repository.EditarAtividade(atividade);
+                            RefreshDataGrid();
+                            ClearForm();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao editar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Necessário um nível maior de acesso!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("É necessário ter um usuário logado!");
+            }
+
             RefreshDataGrid();
         }
 
+        private void AgendamentoApp_Load_1(object sender, EventArgs e)
+        {
+            RefreshDataGrid();
+        }
+
+        private void btnEditar_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridViewAtividades.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dataGridViewAtividades.SelectedRows[0];
+                PreencherControles(row);
+            }
+            else
+            {
+                MessageBox.Show("Selecione uma linha para editar.");
+            }
+        }
+
+        private void PreencherControles(DataGridViewRow row)
+        {
+            string id = row.Cells["id"].Value.ToString();
+            string nome = row.Cells["nome"].Value.ToString();
+            string descricao = row.Cells["descricao"].Value.ToString();
+            string prazo = row.Cells["prazo"].Value.ToString();
+            string situacao = row.Cells["situacao"].Value.ToString();
+
+            // Preencher TextBox
+            txtId.Text = id;
+            txtNome.Text = nome;
+            txtDescricao.Text = descricao;
+            monthCalendarData.SetDate(DateTime.Parse(prazo));
+            if (situacao == "EM EXECUÇÃO")
+            {
+                checkBoxExecucao.Checked = true;
+            }
+            else
+            {
+                checkBoxConcluida.Checked = true;
+            }
+        }
     }
 }
