@@ -25,40 +25,45 @@ namespace Gerenciador_de_Tarefas
             using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
             {
                 SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
-
-                connection.Open();
-
-                string query = "SELECT * FROM atividades";
-                using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
+                try
                 {
-                    using (Microsoft.Data.Sqlite.SqliteDataReader reader = command.ExecuteReader())
+                    connection.Open();
+
+                    string query = "SELECT id, nome, descricao, prazo, situacao FROM atividades";
+                    using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                     {
-                        while (reader.Read())
+                        using (Microsoft.Data.Sqlite.SqliteDataReader reader = command.ExecuteReader())
                         {
-                            Atividade atividade = new Atividade
+                            while (reader.Read())
                             {
-                                id = Convert.ToInt32(reader["id"]),
-                                nome = reader["nome"].ToString(),
-                                descricao = reader["descricao"].ToString(),
-                                prazo = Convert.ToDateTime(reader["prazo"])
-                            };
+                                Atividade atividade = new Atividade
+                                {
+                                    id = Convert.ToInt32(reader["id"]),
+                                    nome = reader["nome"].ToString(),
+                                    descricao = reader["descricao"].ToString(),
+                                    prazo = Convert.ToDateTime(reader["prazo"])
+                                };
 
-                            if (int.TryParse(reader["situacao"].ToString(), out int situacao))
-                            {
-                                atividade.situacao = situacao;
-                            }
-                            else
-                            {
-                                // Trate o caso em que o valor não pôde ser convertido para int.
-                                // Por exemplo, defina um valor padrão, como 0.
-                                atividade.situacao = 0;
-                            }
+                                if (int.TryParse(reader["situacao"].ToString(), out int situacao))
+                                {
+                                    atividade.situacao = situacao;
+                                }
+                                else
+                                {
+                                    atividade.situacao = 0;
+                                }
 
-                            atividades.Add(atividade);
+                                atividades.Add(atividade);
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao carregar os dados: " + ex.Message);
+                }
             }
+            
 
             return atividades;
         }
