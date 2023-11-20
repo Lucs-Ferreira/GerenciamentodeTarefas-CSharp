@@ -34,9 +34,7 @@ namespace GerenciamentodeTarefas_CSharp
         {
             if (e.KeyCode == Keys.Enter)
             {
-                // Chama o método associado ao botão desejado
                 btnSalvarLogin.PerformClick();
-                // Impede que o evento seja propagado para outros controles
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
