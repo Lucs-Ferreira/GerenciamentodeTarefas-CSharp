@@ -604,7 +604,7 @@ namespace Gerenciador_de_Tarefas
         {
             if (Usuarios.logado)
             {
-                if (Usuarios.acesso >= 1)
+                if (Usuarios.acesso >= 2)
                 {
                     try
                     {
@@ -664,7 +664,7 @@ namespace Gerenciador_de_Tarefas
         {
             if (Usuarios.logado)
             {
-                if (Usuarios.acesso >= 1)
+                if (Usuarios.acesso >= 2)
                 {
                     try
                     {
