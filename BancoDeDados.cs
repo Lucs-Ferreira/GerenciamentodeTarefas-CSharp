@@ -41,17 +41,9 @@ namespace Gerenciador_de_Tarefas
                                     id = Convert.ToInt32(reader["id"]),
                                     nome = reader["nome"].ToString(),
                                     descricao = reader["descricao"].ToString(),
-                                    prazo = Convert.ToDateTime(reader["prazo"])
+                                    prazo = Convert.ToDateTime(reader["prazo"]),
+                                    situacao = reader["situacao"].ToString()
                                 };
-
-                                if (int.TryParse(reader["situacao"].ToString(), out int situacao))
-                                {
-                                    atividade.situacao = situacao;
-                                }
-                                else
-                                {
-                                    atividade.situacao = 0;
-                                }
 
                                 atividades.Add(atividade);
                             }
@@ -92,18 +84,19 @@ namespace Gerenciador_de_Tarefas
         {
             using (Microsoft.Data.Sqlite.SqliteConnection connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString))
             {
+
                 SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_e_sqlite3());
 
                 connection.Open();
 
-                string query = "UPDATE atividades SET nome = @Nome, descricao = @Descricao, prazo = @Prazo, situacao = @Concluida WHERE id = @ID";
+                string query = "UPDATE atividades SET nome = @Nome, descricao = @Descricao, prazo = @Prazo, situacao = @Situacao WHERE id = @ID";
                 using (Microsoft.Data.Sqlite.SqliteCommand command = new Microsoft.Data.Sqlite.SqliteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", atividade.id);
                     command.Parameters.AddWithValue("@Nome", atividade.nome);
                     command.Parameters.AddWithValue("@Descricao", atividade.descricao);
                     command.Parameters.AddWithValue("@Prazo", atividade.prazo);
-                    command.Parameters.AddWithValue("@Concluida", atividade.situacao);
+                    command.Parameters.AddWithValue("@Situacao", atividade.situacao);
                     command.ExecuteNonQuery();
                 }
             }

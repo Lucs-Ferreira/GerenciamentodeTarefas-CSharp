@@ -12,7 +12,7 @@ namespace Gerenciador_de_Tarefas
         public string nome { get; set; }
         public string descricao { get; set; }
         public DateTime prazo { get; set; }
-        public int situacao { get; set; }
+        public string situacao { get; set; }
 
     }
 }

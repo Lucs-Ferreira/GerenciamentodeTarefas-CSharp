@@ -26,6 +26,20 @@ namespace GerenciamentodeTarefas_CSharp
             InitializeComponent();
             agendamentoApp = f;
             repository = new AgendamentoRepository(connectionString);
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Logar_KeyPress);
+        }
+
+        private void Logar_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Chama o método associado ao botão desejado
+                btnSalvarLogin.PerformClick();
+                // Impede que o evento seja propagado para outros controles
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
         }
 
         private void btnCancelarLogin_Click(object sender, EventArgs e)
