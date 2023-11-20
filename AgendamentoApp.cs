@@ -10,6 +10,7 @@ namespace Gerenciador_de_Tarefas
     using GerenciamentodeTarefas_CSharp;
     using System;
     using System.Windows.Forms;
+    using System.Xml.Linq;
 
     public partial class AgendamentoApp : Form
     {
@@ -90,17 +91,34 @@ namespace Gerenciador_de_Tarefas
                 {
                     try
                     {
-                        Atividade atividade = new Atividade
+                        if (string.IsNullOrWhiteSpace(txtNome.Text) ||
+                        string.IsNullOrWhiteSpace(txtDescricao.Text) ||
+                        (!checkBoxExecucao.Checked && !checkBoxConcluida.Checked))
                         {
-                            nome = txtNome.Text,
-                            descricao = txtDescricao.Text,
-                            prazo = monthCalendarData.SelectionStart,
-                            situacao = pegarCheckBoxValor()
-                        };
+                            MessageBox.Show("Por favor, preencha todos os campos antes de salvar a tarefa.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
 
-                        repository.AdicionarAtividade(atividade);
-                        RefreshDataGrid();
-                        ClearForm();
+                        if (string.IsNullOrWhiteSpace(txtId.Text))
+                        {
+                            Atividade atividade = new Atividade
+                            {
+                                nome = txtNome.Text,
+                                descricao = txtDescricao.Text,
+                                prazo = monthCalendarData.SelectionStart,
+                                situacao = pegarCheckBoxValor()
+                            };
+
+                            repository.AdicionarAtividade(atividade);
+                            RefreshDataGrid();
+                            ClearForm();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tarefa em modo de edição! Finalize a edição antes de realizar um novo salvamento.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
@@ -560,6 +578,20 @@ namespace Gerenciador_de_Tarefas
                 {
                     try
                     {
+                        if (string.IsNullOrWhiteSpace(txtId.Text))
+                        {
+                            MessageBox.Show("Por favor, selecione a tarefa e clique em Editar antes de atualizar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        if (string.IsNullOrWhiteSpace(txtNome.Text) ||
+                        string.IsNullOrWhiteSpace(txtDescricao.Text) ||
+                        (!checkBoxExecucao.Checked && !checkBoxConcluida.Checked))
+                        {
+                            MessageBox.Show("Por favor, preencha todos os campos antes de Atualizar a tarefa.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
                         if (dataGridViewAtividades.SelectedCells.Count > 0)
                         {
                             Atividade atividade = new Atividade
@@ -574,6 +606,7 @@ namespace Gerenciador_de_Tarefas
                             repository.EditarAtividade(atividade);
                             RefreshDataGrid();
                             ClearForm();
+                            txtId.Text = "";
                         }
                     }
                     catch (Exception ex)
