@@ -118,7 +118,7 @@ namespace Gerenciador_de_Tarefas
                             MessageBox.Show("Tarefa em modo de edição! Finalize a edição antes de realizar um novo salvamento.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
