@@ -118,7 +118,7 @@ namespace Gerenciador_de_Tarefas
                             MessageBox.Show("Tarefa em modo de edição! Finalize a edição antes de realizar um novo salvamento.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -148,39 +148,6 @@ namespace Gerenciador_de_Tarefas
             }
 
             return "";
-        }
-
-        private void btnExcluir_Click(object sender, EventArgs e)
-        {
-            if (Usuarios.logado)
-            {
-                if (Usuarios.acesso >= 1)
-                {
-                    try
-                    {
-                        if (dataGridViewAtividades.SelectedRows.Count > 0)
-                        {
-                            int id = (int)dataGridViewAtividades.SelectedRows[0].Cells["ID"].Value;
-                            repository.ExcluirAtividade(id);
-                            RefreshDataGrid();
-                            ClearForm();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Erro ao deletar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("Necessário um nível maior de acesso!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("É necessário ter um usuário logado!");
-            }
         }
 
         private void ClearForm()
@@ -635,15 +602,36 @@ namespace Gerenciador_de_Tarefas
 
         private void btnEditar_Click_1(object sender, EventArgs e)
         {
-            if (dataGridViewAtividades.SelectedCells.Count > 0)
+            if (Usuarios.logado)
             {
-                int rowIndex = dataGridViewAtividades.SelectedCells[0].RowIndex;
-                DataGridViewRow row = dataGridViewAtividades.Rows[rowIndex];
-                PreencherTextBox(row);
+                if (Usuarios.acesso >= 2)
+                {
+                    try
+                    {
+                        if (dataGridViewAtividades.SelectedCells.Count > 0)
+                        {
+                            int rowIndex = dataGridViewAtividades.SelectedCells[0].RowIndex;
+                            DataGridViewRow row = dataGridViewAtividades.Rows[rowIndex];
+                            PreencherTextBox(row);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selecione uma linha para editar.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao editar a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Necessário um nível maior de acesso!");
+                }
             }
             else
             {
-                MessageBox.Show("Selecione uma linha para editar.");
+                MessageBox.Show("É necessário ter um usuário logado!");
             }
         }
 
@@ -674,26 +662,39 @@ namespace Gerenciador_de_Tarefas
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-            try
+            if (Usuarios.logado)
             {
-                if (dataGridViewAtividades.SelectedCells.Count > 0)
+                if (Usuarios.acesso >= 2)
                 {
-                    int rowIndex = dataGridViewAtividades.SelectedCells[0].RowIndex;
-                    DataGridViewRow row = dataGridViewAtividades.Rows[rowIndex];
-                    int id = int.Parse(row.Cells["id"].Value.ToString());
-                    repository.ExcluirAtividade(id);
-                    RefreshDataGrid();
+                    try
+                    {
+                        if (dataGridViewAtividades.SelectedCells.Count > 0)
+                        {
+                            int rowIndex = dataGridViewAtividades.SelectedCells[0].RowIndex;
+                            DataGridViewRow row = dataGridViewAtividades.Rows[rowIndex];
+                            int id = int.Parse(row.Cells["id"].Value.ToString());
+                            repository.ExcluirAtividade(id);
+                            RefreshDataGrid();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selecione uma linha para excluir.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao excluir a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Selecione uma linha para excluir.");
+                    MessageBox.Show("Necessário um nível maior de acesso!");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Erro ao excluir a tarefa! " + ex.Message, "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("É necessário ter um usuário logado!");
             }
-
         }
     }
 }
